@@ -1,6 +1,6 @@
 <?php
 
-namespace Trash_Log\Trash_Log;
+namespace BEAPI\Trash_Log;
 
 /**
  * Handles logging of trashed posts, pages, and media.
@@ -30,7 +30,7 @@ class Logger {
 	 */
 	protected function init(): void {
 		// log posts, pages, custom post types
-		add_action( 'wp_trash_post', [ $this, 'log_post_trash' ], 10, 2 );
+		add_action( 'wp_trash_post', [ $this, 'log_post_trash' ], 10, 1 );
 
 		// log attachments
 		add_action( 'delete_attachment', [ $this, 'log_deleted_attachment' ], 5, 1 );
@@ -67,11 +67,10 @@ class Logger {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $post_id        Post ID.
-	 * @param string $previous_status Previous post status (unused, required by hook).
+	 * @param int $post_id Post ID.
 	 * @return void
 	 */
-	public function log_post_trash( int $post_id, string $_previous_status ): void {
+	public function log_post_trash( int $post_id ): void {
 		$post = get_post( $post_id );
 		if ( ! $post ) {
 			return;
@@ -123,9 +122,9 @@ class Logger {
 		// Get deletion date.
 		$trash_time = get_post_meta( $post_id, '_wp_trash_meta_time', true );
 		if ( ! empty( $trash_time ) && is_numeric( $trash_time ) ) {
-			$deletion_date = Helpers::format_date_dd_mm_yyyy( (int) $trash_time );
+			$deletion_date = Helpers::format_date( (string) $trash_time, 'U', 'd/m/Y' );
 		} else {
-			$deletion_date = Helpers::format_date_dd_mm_yyyy( time() );
+			$deletion_date = Helpers::format_date( (string) time(), 'U', 'd/m/Y' );
 		}
 
 		// Get deleted item name.

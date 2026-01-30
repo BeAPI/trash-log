@@ -37,8 +37,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Plugin constants
 define( 'TRASH_LOG_VERSION', '1.0.0' );
 define( 'TRASH_LOG_VIEWS_FOLDER_NAME', 'trash-log' );
-define( 'TRASH_LOG_CPT_NAME', 'custom_post_type' );
-define( 'TRASH_LOG_TAXO_NAME', 'custom_taxonomy' );
 
 // Plugin URL and PATH
 define( 'TRASH_LOG_URL', plugin_dir_url( __FILE__ ) );
@@ -48,20 +46,24 @@ define( 'TRASH_LOG_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 // Load autoloader
 require_once TRASH_LOG_DIR . 'autoload.php';
 
-// instantiate the loader
-$loader = new \Trash_Log\Trash_Log\Autoloader();
+// Instantiate the loader
+$loader = new \BEAPI\Trash_Log\Autoloader();
 
-// register the autoloader
+// Register the autoloader
 $loader->register();
 
-// register the base directories for the namespace prefix
-$loader->addNamespace( 'Trash_Log\Trash_Log', TRASH_LOG_DIR . 'classes' );
+// Register the base directories for the namespace prefix
+$loader->addNamespace( 'BEAPI\Trash_Log', TRASH_LOG_DIR . 'classes' );
 
 add_action( 'plugins_loaded', 'init_trash_log_plugin' );
 /**
- * Init the plugin
+ * Init the plugin.
+ *
+ * @return void
  */
 function init_trash_log_plugin(): void {
-	// Client
-	\Trash_Log\Trash_Log\Main::get_instance();
+	\BEAPI\Trash_Log\Main::get_instance();
+	\BEAPI\Trash_Log\Logger::get_instance();
+	\BEAPI\Trash_Log\CSV_Handler::get_instance();
+	\BEAPI\Trash_Log\Admin::get_instance();
 }

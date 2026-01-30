@@ -1,6 +1,6 @@
 <?php
 
-namespace Trash_Log\Trash_Log;
+namespace BEAPI\Trash_Log;
 
 /**
  * Handles CSV file generation, storage, and management.
@@ -256,15 +256,11 @@ class CSV_Handler {
 	 * @return bool True if user has permission, false otherwise.
 	 */
 	public function current_user_can_access(): bool {
-		if ( is_multisite() ) {
-			return is_super_admin();
-		}
-
 		return current_user_can( 'manage_options' );
 	}
 
 	/**
-	 * Protect specific CSV file with .htaccess file.
+	 * Protect specific CSV file with .htaccess file using WordPress markers.
 	 *
 	 * @since 1.0.0
 	 *
@@ -276,21 +272,15 @@ class CSV_Handler {
 			return false;
 		}
 
-		$htaccess_file     = trailingslashit( $csv_dir ) . '.htaccess';
-		$htaccess_content  = "# Protect Trash Log CSV file\n";
-		$htaccess_content .= "# Deny direct access to trash-log.csv only\n";
-		$htaccess_content .= '<Files ' . self::CSV_FILENAME . ">\n";
-		$htaccess_content .= "    Order allow,deny\n";
-		$htaccess_content .= "    Deny from all\n";
-		$htaccess_content .= "</Files>\n";
+		$htaccess_file = trailingslashit( $csv_dir ) . '.htaccess';
+		$marker        = 'Trash Log';
+		$insertion     = [
+			'<Files ' . self::CSV_FILENAME . '>',
+			'    Order allow,deny',
+			'    Deny from all',
+			'</Files>',
+		];
 
-		$written = file_put_contents( $htaccess_file, $htaccess_content );
-		if ( false === $written ) {
-			return false;
-		}
-
-		chmod( $htaccess_file, 0644 );
-
-		return true;
+		return insert_with_markers( $htaccess_file, $marker, $insertion );
 	}
 }

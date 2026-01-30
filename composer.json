@@ -32,7 +32,7 @@
     },
     "autoload": {
       "psr-4": {
-        "Trash_Log\\Trash_Log\\": "classes/"
+        "BEAPI\\Trash_Log\\": "classes/"
       }
     },
     "scripts": {
