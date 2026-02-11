@@ -1,6 +1,6 @@
 <?php
 
-namespace Trash_Log\Trash_Log;
+namespace BEAPI\Trash_Log;
 
 /**
  * Singleton base class for having singleton implementation
@@ -11,7 +11,8 @@ namespace Trash_Log\Trash_Log;
  * /!\ The get_instance method have to be implemented !
  *
  * Class Singleton
- * @package Trash_Log\Trash_Log
+ *
+ * @package BEAPI\Trash_Log
  */
 trait Singleton {
 

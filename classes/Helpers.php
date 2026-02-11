@@ -1,6 +1,6 @@
 <?php
 
-namespace Trash_Log\Trash_Log;
+namespace BEAPI\Trash_Log;
 
 /**
  * The purpose of the API class is to have the basic reusable methods like :
@@ -14,7 +14,8 @@ namespace Trash_Log\Trash_Log;
  * and stick to the non context methods
  *
  * Class API
- * @package Trash_Log\Trash_Log
+ *
+ * @package BEAPI\Trash_Log
  */
 class Helpers {
 
@@ -140,22 +141,6 @@ class Helpers {
 	 */
 	public static function datetime_i18n( string $format, \DateTime $date ): string {
 		return date_i18n( $format, $date->format( 'U' ) );
-	}
-
-	/**
-	 * Format a timestamp to DD/MM/YYYY format.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int $timestamp Unix timestamp.
-	 * @return string Formatted date in DD/MM/YYYY format.
-	 */
-	public static function format_date_dd_mm_yyyy( int $timestamp ): string {
-		if ( $timestamp <= 0 ) {
-			return '';
-		}
-
-		return date_i18n( 'd/m/Y', $timestamp );
 	}
 
 	/**

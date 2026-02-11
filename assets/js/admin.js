@@ -51,7 +51,7 @@
 			type: 'POST',
 			data: {
 				action: 'trash_log_delete_csv',
-				nonce: trashLogAdmin.nonce,
+				nonce: trashLogAdmin.nonceDelete,
 			},
 			success: function( response ) {
 				if ( response.success ) {
@@ -87,7 +87,7 @@
 			type: 'POST',
 			data: {
 				action: 'trash_log_generate_csv',
-				nonce: trashLogAdmin.nonce,
+				nonce: trashLogAdmin.nonceGenerate,
 			},
 			success: function( response ) {
 				if ( response.success ) {
@@ -123,7 +123,7 @@
 			type: 'POST',
 			data: {
 				action: 'trash_log_generate_csv',
-				nonce: trashLogAdmin.nonce,
+				nonce: trashLogAdmin.nonceGenerate,
 			},
 			success: function( response ) {
 				if ( response.success ) {

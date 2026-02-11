@@ -1,6 +1,6 @@
 <?php
 
-namespace Trash_Log\Trash_Log;
+namespace BEAPI\Trash_Log;
 
 /**
  * Handles admin page and AJAX actions.
@@ -52,10 +52,6 @@ class Admin {
 	 * @return bool True if user has permission, false otherwise.
 	 */
 	private function current_user_can_access(): bool {
-		if ( is_multisite() ) {
-			return is_super_admin();
-		}
-
 		return current_user_can( 'manage_options' );
 	}
 
@@ -189,6 +185,8 @@ class Admin {
 			[
 				'ajaxUrl'          => admin_url( 'admin-ajax.php' ),
 				'nonce'            => wp_create_nonce( 'trash_log_admin' ),
+				'nonceDelete'      => wp_create_nonce( 'trash_log_delete_csv' ),
+				'nonceGenerate'    => wp_create_nonce( 'trash_log_generate_csv' ),
 				'confirmText'      => __( 'Are you sure you want to delete the CSV file?', 'trash-log' ),
 				'confirmPurgeText' => __( 'Are you sure you want to purge all log entries from the database? This action cannot be undone.', 'trash-log' ),
 			]
@@ -203,10 +201,6 @@ class Admin {
 	 * @return void
 	 */
 	public function render_admin_page(): void {
-		if ( ! $this->current_user_can_access() ) {
-			wp_die( esc_html__( 'You do not have permission to access this page.', 'trash-log' ) );
-		}
-
 		$csv_handler   = CSV_Handler::get_instance();
 		$logger        = Logger::get_instance();
 		$csv_exists    = $csv_handler->csv_exists();
@@ -296,7 +290,7 @@ class Admin {
 	 * @return void
 	 */
 	public function ajax_delete_csv(): void {
-		if ( ! $this->verify_ajax_request( 'trash_log_admin' ) ) {
+		if ( ! $this->verify_ajax_request( 'trash_log_delete_csv' ) ) {
 			return;
 		}
 
@@ -318,7 +312,7 @@ class Admin {
 	 * @return void
 	 */
 	public function ajax_generate_csv(): void {
-		if ( ! $this->verify_ajax_request( 'trash_log_admin' ) ) {
+		if ( ! $this->verify_ajax_request( 'trash_log_generate_csv' ) ) {
 			return;
 		}
 

@@ -1,5 +1,5 @@
 <?php
-namespace Trash_Log\Trash_Log;
+namespace BEAPI\Trash_Log;
 
 /**
  * An example of a general-purpose implementation that includes the optional
