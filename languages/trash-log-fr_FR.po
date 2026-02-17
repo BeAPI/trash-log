@@ -111,8 +111,8 @@ msgid "Contributor Name"
 msgstr "Nom du contributeur"
 
 #: classes/CSV_Handler.php:177
-msgid "Deleted Item"
-msgstr "Élément supprimé"
+msgid "Content Type"
+msgstr "Type de contenu"
 
 #: classes/CSV_Handler.php:178
 msgid "Date"
@@ -137,11 +137,6 @@ msgstr "Échec de la suppression du fichier CSV."
 #: classes/Logger.php:119
 msgid "Automatic action"
 msgstr "Action automatique"
-
-#. translators: %d: Post ID
-#: classes/Logger.php:135
-msgid "Item #%d"
-msgstr "Élément #%d"
 
 #: views/admin-page.php:25
 msgid "CSV File Information"

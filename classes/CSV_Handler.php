@@ -174,12 +174,12 @@ class CSV_Handler {
 
 		$header = [
 			__( 'Contributor Name', 'trash-log' ),
-			__( 'Deleted Item', 'trash-log' ),
+			__( 'Content Type', 'trash-log' ),
 			__( 'Date', 'trash-log' ),
 			__( 'Document Size', 'trash-log' ),
 			__( 'URL', 'trash-log' ),
 		];
-		fputcsv( $file_handle, $header );
+		fputcsv( $file_handle, $header, ';' );
 
 		foreach ( $entries as $entry ) {
 			$row = [
@@ -189,7 +189,7 @@ class CSV_Handler {
 				$entry['media_size'] ?? '',
 				$entry['url'] ?? '',
 			];
-			fputcsv( $file_handle, $row );
+			fputcsv( $file_handle, $row, ';' );
 		}
 
 		fclose( $file_handle );

@@ -127,15 +127,9 @@ class Logger {
 			$deletion_date = Helpers::format_date( (string) time(), 'U', 'd/m/Y' );
 		}
 
-		// Get deleted item name.
-		$deleted_item = get_the_title( $post_id );
-		if ( empty( $deleted_item ) ) {
-			$deleted_item = sprintf(
-				/* translators: %d: Post ID */
-				__( 'Item #%d', 'trash-log' ),
-				$post_id
-			);
-		}
+		// Get content type label.
+		$post_type_obj = get_post_type_object( $post->post_type );
+		$deleted_item  = $post_type_obj ? $post_type_obj->labels->singular_name : $post->post_type;
 
 		// Get media size (only for attachments).
 		$media_size = '';
