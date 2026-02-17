@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Trash Log
-Version: 1.0.0
+Version: 1.0.1
 Version Boilerplate: 3.5.0
 Plugin URI: https://beapi.fr
 Description: Simply logs everything sent to trash - sponsored by CDC Habitat
