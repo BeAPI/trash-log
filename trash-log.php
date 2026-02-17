@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'TRASH_LOG_VERSION', '1.0.0' );
+define( 'TRASH_LOG_VERSION', '1.0.1' );
 define( 'TRASH_LOG_VIEWS_FOLDER_NAME', 'trash-log' );
 
 // Plugin URL and PATH
